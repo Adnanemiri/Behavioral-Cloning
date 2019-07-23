@@ -13,8 +13,8 @@ The model architecture is based on [NVIDIA model](https://devblogs.nvidia.com/pa
 
 [//]: # (Image References)
 
-[image1]: crop.png "Model Visualization"
-[image2]: cameras.png "Model Visualization"
+[image1]: examples/crop.png "Model Visualization"
+[image2]: examples/cameras.png "Model Visualization"
 
 ### Files included
 
