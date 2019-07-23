@@ -13,7 +13,7 @@ from keras.optimizers import Adam
 import matplotlib.pyplot as plt
 from utils import *
 
-driving_log = pd.read_csv('/opt/Behavioral-Cloning/data/driving_log.csv')
+driving_log = pd.read_csv('data/driving_log.csv')
 train_samples, validation_samples = train_test_split(driving_log, test_size=0.2)
 
 # Set our batch size

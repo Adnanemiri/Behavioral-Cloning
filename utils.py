@@ -23,14 +23,14 @@ def preprocess_image(row_data):
     direction = np.random.choice(['center', 'left', 'right'])
 
     if direction == 'left':
-        path_file = '/opt/Behavioral-Cloning/data' + row_data['left']
+        path_file = 'data' + row_data['left']
         angle += 0.25
     elif direction == 'right':
-        path_file = '/opt/Behavioral-Cloning/data' + row_data['right']
+        path_file = 'data' + row_data['right']
         angle -= 0.25
         
     else:
-        path_file = '/opt/Behavioral-Cloning/data' + row_data['center']
+        path_file = 'data' + row_data['center']
     
     image = cv2.imread(path_file)
     image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
