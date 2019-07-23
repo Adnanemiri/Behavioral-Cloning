@@ -2,7 +2,9 @@ import argparse
 import base64
 from datetime import datetime
 import os
+from keras import backend
 import shutil
+import cv2
 
 import numpy as np
 import socketio
@@ -21,6 +23,8 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
+def rmse(y_true, y_pred):
+    return backend.sqrt(backend.mean(backend.square(y_pred - y_true), axis=-1))
 
 class SimplePIController:
     def __init__(self, Kp, Ki):
@@ -44,7 +48,7 @@ class SimplePIController:
 
 
 controller = SimplePIController(0.1, 0.002)
-set_speed = 9
+set_speed = 10
 controller.set_desired(set_speed)
 
 
@@ -61,6 +65,9 @@ def telemetry(sid, data):
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
         image_array = np.asarray(image)
+        image_array = image_array[50:140,:]
+        image_array = cv2.resize(image_array,(200,66), interpolation=cv2.INTER_AREA)
+        
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
         throttle = controller.update(float(speed))
